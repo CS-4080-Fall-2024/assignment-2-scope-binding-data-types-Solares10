@@ -1,0 +1,24 @@
+     Answer for #1
+          Statement
+              |
+          Assignment
+              |
+      __________|__________
+     |                      |
+ Identifier           Expression
+     |                      |
+     A              Term * Factor
+                     |      |
+                Term       Factor
+                 |           |
+              Factor      (Expression)
+                 |           |
+             Identifier    Term * Factor
+                 |           |      |
+                 B        Factor  (Expression)
+                          |          |
+                     Identifier    Term + Term
+                          |           |
+                          C       Identifier  Term
+                                     |        |
+                                     A        B
