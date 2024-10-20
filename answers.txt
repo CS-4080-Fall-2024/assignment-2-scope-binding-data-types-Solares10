@@ -22,8 +22,9 @@
                           C       Identifier  Term
                                      |        |
                                      A        B
-Question#2 
-a.In the StaticScope class, there are static variables u, v, and w initialized to specific values, 
+Question # 2 
+a.
+In the StaticScope class, there are static variables u, v, and w initialized to specific values, 
 and a method add(int z) that modifies the static u using v and z. 
 The method foo(int x, int w) redefines v locally and passes the add(v) method to bar, 
 which creates a local u and runs the function. When foo is called in main, 
@@ -33,8 +34,8 @@ b.
 This code simulates deep binding by using lambdas in Java, where the variable v from the 
 calling scope of foo is captured and passed to add, modifying the global variable u. 
 The method bar defines a local u that shadows the global one but does not affect the lambda,
- which still uses the outer v. After calling foo with u as an argument, the global u is updated, 
- and the final value is printed in the main method.(Answer-126)
+which still uses the outer v. After calling foo with u as an argument, the global u is updated, 
+and the final value is printed in the main method.(Answer-126)
 
 c.
 In this code, the add method modifies the global variable u using locally passed values localU,
