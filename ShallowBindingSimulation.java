@@ -1,33 +1,33 @@
 public class ShallowBindingSimulation {
-    static int u = 42;
-    static int v = 69;
-    static int w = 17;
+    static int u = 42; // I declare a global variable 'u' and set it to 42
+    static int v = 69; // I declare a global variable 'v' and set it to 69
+    static int w = 17; // I declare a global variable 'w' and set it to 17
 
-    // Procedure add that modifies the global u
+    // Procedure add that modifies the global 'u'
     public static void add(int z, int localU, int localV) {
-        // Use the local values of u and v (shallow binding simulation)
-        u = localV + localU + z; // Use the local 'u' and 'v' instead of global ones
+        // I use the local values of 'u' and 'v' (simulating shallow binding)
+        u = localV + localU + z; // I update the global 'u' using the local 'u' and 'v' values along with 'z'
     }
 
     // Procedure bar that creates a local 'u' and invokes the passed function
     public static void bar(int vFromFoo, RunnableWithEnv fun) {
-        int u = w; // Local 'u' shadows the global one (u = 17)
-        fun.run(u, vFromFoo); // Pass the local 'u' and the 'v' from foo as arguments
+        int u = w; // I create a local 'u' that shadows the global 'u' (setting it to 17)
+        fun.run(u, vFromFoo); // I call the passed function with my local 'u' and the 'v' from foo
     }
 
     // Procedure foo that redefines 'v' and calls 'bar'
     public static void foo(int x, int w) {
-        int v = x; // Local 'v' shadows the global one (v = 42)
-        bar(v, (localU, localV) -> add(v, localU, localV)); // Capture local 'v' and pass to 'bar'
+        int v = x; // I create a local 'v' that shadows the global 'v' (setting it to the value of 'x')
+        bar(v, (localU, localV) -> add(v, localU, localV)); // I capture my local 'v' and pass it to 'bar'
     }
 
     public static void main(String[] args) {
-        foo(u, 13); // foo(u, 13) -> foo(42, 13)
-        System.out.println(u); // This will print the modified global 'u'
+        foo(u, 13); // I call foo with the global 'u' (42) and 13 as arguments
+        System.out.println(u); // I print the modified global 'u'
     }
 }
 
-// Custom functional interface to pass environment variables (u and v)
+// Custom functional interface to pass environment variables (localU and localV)
 interface RunnableWithEnv {
-    void run(int localU, int localV); // Takes 'localU' and 'localV' as arguments
+    void run(int localU, int localV); // I define a method that takes 'localU' and 'localV' as arguments
 }

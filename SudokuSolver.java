@@ -1,7 +1,7 @@
 public class SudokuSolver {
 
     public static void main(String[] args) {
-        // Example Sudoku board with empty cells (denoted by '.')
+        // I define a sample Sudoku board with empty cells represented as '.'
         char[][] board = {
                 {'5', '3', '.', '.', '7', '.', '.', '.', '.'},
                 {'6', '.', '.', '1', '9', '5', '.', '.', '.'},
@@ -14,75 +14,82 @@ public class SudokuSolver {
                 {'.', '.', '.', '.', '8', '.', '.', '7', '9'}
         };
 
-        // Call the solve function to fill the board
+        // I call the method to solve the Sudoku puzzle
         solveSudoku(board);
 
-        // Print the solved board
+        // I print the completed Sudoku board to the console
         printBoard(board);
     }
 
+    // This method is where I solve the Sudoku puzzle
     public static boolean solveSudoku(char[][] board) {
-        // Traverse through the 9x9 board
+        // I loop through each row of the 9x9 board
         for (int row = 0; row < 9; row++) {
+            // I loop through each column in the current row
             for (int col = 0; col < 9; col++) {
-                // Check if the cell is empty (i.e., '.')
+                // I check if the current cell is empty
                 if (board[row][col] == '.') {
-                    // Try placing digits from '1' to '9'
+                    // I try placing digits '1' to '9' in the empty cell
                     for (char num = '1'; num <= '9'; num++) {
+                        // I check if placing the number is valid
                         if (isValid(board, row, col, num)) {
-                            board[row][col] = num; // Place the number
+                            board[row][col] = num; // I place the number in the cell
 
-                            // Recursively attempt to solve the rest of the board
+                            // I recursively try to solve the rest of the Sudoku board
                             if (solveSudoku(board)) {
-                                return true;
+                                return true; // I return true if the board is solved
                             }
 
-                            // If placing num doesn't lead to a solution, backtrack
+                            // If placing num doesn't lead to a solution, I reset the cell and backtrack
                             board[row][col] = '.';
                         }
                     }
-                    return false; // No valid number was found, trigger backtracking
+                    return false; // If I can't find a valid number, I trigger backtracking
                 }
             }
         }
-        return true; // Sudoku solved
+        return true; // I return true when the Sudoku puzzle is solved
     }
 
+    // This method checks if a number can be placed in the specified cell
     public static boolean isValid(char[][] board, int row, int col, char num) {
-        // Check if num is already in the current row
+        // I check if the number is already present in the current row
         for (int i = 0; i < 9; i++) {
             if (board[row][i] == num) {
-                return false;
+                return false; // The number cannot be placed, so I return false
             }
         }
 
-        // Check if num is already in the current column
+        // I check if the number is already present in the current column
         for (int i = 0; i < 9; i++) {
             if (board[i][col] == num) {
-                return false;
+                return false; // The number cannot be placed, so I return false
             }
         }
 
-        // Check if num is already in the current 3x3 sub-box
-        int startRow = (row / 3) * 3;
-        int startCol = (col / 3) * 3;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        // I check if the number is present in the 3x3 sub-grid
+        int startRow = (row / 3) * 3; // I find the starting row of the 3x3 box
+        int startCol = (col / 3) * 3; // I find the starting column of the 3x3 box
+        for (int i = 0; i < 3; i++) { // I loop through rows of the 3x3 box
+            for (int j = 0; j < 3; j++) { // I loop through columns of the 3x3 box
                 if (board[startRow + i][startCol + j] == num) {
-                    return false;
+                    return false; // The number is found in the box, so I cannot place it, and I return false
                 }
             }
         }
 
-        return true; // The placement is valid
+        return true; // The placement of the number is valid, so I return true
     }
 
+    // This method prints the Sudoku board
     public static void printBoard(char[][] board) {
+        // I loop through each row of the board
         for (int i = 0; i < 9; i++) {
+            // I loop through each column in the current row
             for (int j = 0; j < 9; j++) {
-                System.out.print(board[i][j] + " ");
+                System.out.print(board[i][j] + " "); // I print the current cell
             }
-            System.out.println();
+            System.out.println(); // I move to the next line after printing a row
         }
     }
 }
