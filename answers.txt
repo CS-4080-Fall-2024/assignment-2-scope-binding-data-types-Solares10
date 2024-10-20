@@ -1,0 +1,45 @@
+     Answer for #1
+          Statement
+              |
+          Assignment
+              |
+      __________|__________
+     |                      |
+ Identifier           Expression
+     |                      |
+     A              Term * Factor
+                     |      |
+                Term       Factor
+                 |           |
+              Factor      (Expression)
+                 |           |
+             Identifier    Term * Factor
+                 |           |      |
+                 B        Factor  (Expression)
+                          |          |
+                     Identifier    Term + Term
+                          |           |
+                          C       Identifier  Term
+                                     |        |
+                                     A        B
+Question # 2 
+a.
+In the StaticScope class, there are static variables u, v, and w initialized to specific values, 
+and a method add(int z) that modifies the static u using v and z. 
+The method foo(int x, int w) redefines v locally and passes the add(v) method to bar, 
+which creates a local u and runs the function. When foo is called in main, 
+it updates the static u based on the initial u, v, and the passed x, and the updated u is printed(Answer-153)
+
+b. 
+This code simulates deep binding by using lambdas in Java, where the variable v from the 
+calling scope of foo is captured and passed to add, modifying the global variable u. 
+The method bar defines a local u that shadows the global one but does not affect the lambda,
+which still uses the outer v. After calling foo with u as an argument, the global u is updated, 
+and the final value is printed in the main method.(Answer-126)
+
+c.
+In this code, the add method modifies the global variable u using locally passed values localU,
+localV, and z. The foo method redefines a local v, captures it in a lambda function, and passes 
+it to bar, which further calls add with local values. This demonstrates shallow binding, where 
+locally defined variables in procedures (foo and bar) are used in the computation instead of 
+global variables.(Answer-101)
